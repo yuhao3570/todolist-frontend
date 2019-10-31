@@ -1,36 +1,29 @@
 import React, { useState } from 'react';
 
-function InputTodo(props) {
+function InputTodo({addTodo}) {
   const [inputText, setInput] = useState('');
   
-  const handleInputChange = () => {
-
-  }
-
   const handleInputSubmit = () => {
-
-  }
-
-  const handleInput = () => {
-    if (inputedValue.length > 3) {
-        this.props.addTodo(inputedValue);
-    } else {
-        alert('Inputed value must be longer than 3 characters!')
+    if(inputText.length < 3){
+      alert('Inputed value must be longer than 3 characters!')
+    }else {
+      addTodo(inputText);
+      setInput('');
     }
   }
 
-  return ( 
+  return (
     <div>
       <input 
         type="text" 
         value={inputText}
-        onChange={handleInputChange} />
+        onChange={(event) => setInput(event.target.value)} />
       <button 
         type = 'submit'
         onClick = {handleInputSubmit} > ADD 
       </button> 
     </div>
-    );
+  );
 }
 
 export default InputTodo;

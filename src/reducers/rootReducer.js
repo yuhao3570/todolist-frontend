@@ -1,14 +1,25 @@
-const intiState = {
+const initState = {
   todos: [],
   updating: false
 }
 
-const reducer = ( state = initState, action) => {
-  if(action.type = 'GET_Start') {
+const rootReducer = ( state = initState, action) => {
+  if(action.type === 'GET_TODOS_START') {
+    return {
+      ...state,
+      updating: true
+    }
+  }
 
+  if(action.type === 'GET_TODOS_SUCCESS'){
+    return {
+      ...state,
+      todos: [...action.data],
+      updating: false
+    }
   }
 
   return state;
 }
 
-export default rootReducers;
+export default rootReducer;

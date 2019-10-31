@@ -1,30 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class TodoItem extends React.Component{
+function TodoItem({todo, updateTodo, deleteTodo}) {
+  let {todoId, text, done} = todo;
+  let [todoStatus, setTodoStatus] = useState(done);
 
-    constructor(props){
-        super(props);
-        this.handleComplete = this.handleComplete.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
-    }
-    
-    handleDelete(){
-        this.props.delete(this.props.item.name);
-    }
+  const handleUpdate = (event) => {
+    setTodoStatus(event.target.checked);
+    updateTodo({
+      ...todo, 
+      done: todoStatus
+    })
+  }
 
-    handleComplete(event){
-        this.props.complete(this.props.item.name, event.target.checked);
-    }
-
-    render() {
-        return (
-            <div className="todo-item">
-                <span>{this.props.item.name}</span>
-                <button className="delete" onClick={this.handleDelete}></button>
-                <input type="checkbox" checked={this.props.item.completed} onChange={this.handleComplete} />
-            </div>
-        );
-    }
+  return (
+    <div className="todo-item">
+      <span>{text}</span>
+      <button 
+        id={todoId} 
+        className="deleteTodo" 
+        onClick={(event) => deleteTodo(event.target.id)}
+      ></button>
+      <input 
+        type="checkbox" 
+        checked={todoStatus}
+        onChange={handleUpdate} 
+      />
+    </div>
+  );
 }
 
 export default TodoItem;
