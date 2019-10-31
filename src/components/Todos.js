@@ -1,19 +1,47 @@
 import React from 'react';
-import Input from './Input';
+import { connect } from react-redux;
+import deleteTodoAction from '../actions/deleteTodoAction';
+import addTodoAction from '../actions/addTodoAction';
+import InputTodo from './InputTodo';
 import TodoItem from './TodoItem';
 
-class Todos extends React.Component{
+function TodoList({todos}) {
+    return(
+        <div className="todos">
+            <div className="heading">
+                TODOS
+            </div>
+            <div className="input">
+                <InputTodo addTodo={this.addTodoFromInput}/>
+            </div>
 
-    constructor(){
-        super();
-        this.state = {
-            todos: []
-        }
+            <div className="details">
+                {todos.map(todo => <TodoItem item={todo} delete={this.deleteTodo} complete={this.completeTodo}/>)}
+            </div>
+        </div>
+    );    
+}
 
-        this.addTodoFromInput = this.addTodoFromInput.bind(this);
-        this.completeTodo = this.completeTodo.bind(this);
-        this.deleteTodo = this.deleteTodo.bind(this);
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos
     }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+		getTodos: () => dispatch(getTodosAction()),
+		deleteTodoById: (id) => dispatch(deleteTodoAction(id)),
+		addTodo: (todo) =>  dispatch(addTodoAction(todo)),
+		updateTodo: (todo) => dispatch(updateTodoAction(todo))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+
+
+
+class Todos extends React.Component{
 
     addTodoFromInput(input){
         this.setState({
@@ -33,23 +61,7 @@ class Todos extends React.Component{
 
         this.setState(tempTodos);
     }
-    
-    render(){
-        return(
-            <div className="todos">
-                <div className="heading">
-                    TODOS
-                </div>
-                <div className="input">
-                    <Input addTodo={this.addTodoFromInput}/>
-                </div>
 
-                <div className="details">
-                    {this.state.todos.map(todo => <TodoItem item={todo} delete={this.deleteTodo} complete={this.completeTodo}/>)}
-                </div>
-            </div>
-        );      
-    }
 }
 
-export default Todos;
+export default TodoList;
