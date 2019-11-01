@@ -7,28 +7,16 @@ import updateTodoAction from '../actions/updateTodoAction';
 import InputTodo from './InputTodo';
 import TodoItem from './TodoItem';
 
-function TodoList({ todos, addTodo, getTodos, deleteTodoById, updateTodo }) {
-  
-  useEffect(() => {
-    (async function () {
-      try {
-        getTodos();
-      } 
-      catch (e) {
-        console.error(e);
-      }
-    })();
-  }, [])
-
+function TodoList({ todos, currentMaxId, addTodo, getTodos, deleteTodoById, updateTodo }) {
+  useEffect(getTodos, []);
   return (
-    <div className="todos">
+    <div className="todolist">
       <div className="heading">
         TODOS
-          </div>
-      <div className="input">
-        <InputTodo addTodo={addTodo} />
       </div>
 
+      <InputTodo currentMaxId={currentMaxId} addTodo={addTodo} />
+      
       <div className="details">
         {todos.map(todo =>
           <TodoItem
@@ -46,16 +34,17 @@ function TodoList({ todos, addTodo, getTodos, deleteTodoById, updateTodo }) {
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    currentMaxId: state.currentMaxId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTodos: () => dispatch(getTodosAction()),
-    deleteTodoById: (id) => dispatch(deleteTodoAction(id)),
-    addTodo: (todo) => dispatch(addTodoAction(todo)),
-    updateTodo: (todo) => dispatch(updateTodoAction(todo))
+    getTodos: () => {dispatch(getTodosAction())},
+    deleteTodoById: (id) => {dispatch(deleteTodoAction(id))},
+    addTodo: (todo) => {dispatch(addTodoAction(todo))},
+    updateTodo: (todo) => {dispatch(updateTodoAction(todo))}
   }
 }
 

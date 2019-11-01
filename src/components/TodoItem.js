@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function TodoItem({todo, updateTodo, deleteTodo}) {
-  let {todoId, text, done} = todo;
-  let [todoStatus, setTodoStatus] = useState(done);
-
   const handleUpdate = (event) => {
-    setTodoStatus(event.target.checked);
     updateTodo({
       ...todo, 
-      done: todoStatus
+      done: event.target.checked
     })
   }
 
   return (
     <div className="todo-item">
-      <span>{text}</span>
-      <button 
-        id={todoId} 
-        className="deleteTodo" 
-        onClick={(event) => deleteTodo(event.target.id)}
-      ></button>
-      <input 
-        type="checkbox" 
-        checked={todoStatus}
-        onChange={handleUpdate} 
-      />
+      <span>{todo.text}</span>
+      <div className="item-actions">
+        <button 
+          id={todo.id} 
+          className="delete-button" 
+          onClick={(event) => deleteTodo(parseInt(event.target.id))}
+        ></button>
+        <input 
+          className=""
+          type="checkbox" 
+          checked={todo.done}
+          onChange={handleUpdate} 
+        />
+      </div>
     </div>
   );
 }

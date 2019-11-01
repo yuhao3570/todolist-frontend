@@ -1,0 +1,79 @@
+body {
+  background: #50E3C2;
+  text-align: center;
+}
+
+.todolist{
+  background: #F7F7F7;
+  margin: 50px auto;
+  padding-top: 20px;
+  width: 70%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Lato', sans-serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: #b8b8b8;
+}
+
+.input-area {
+  margin: 10px auto;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.input-area input {
+  width: 280px;
+  font-size:24px;
+}
+
+.button-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 26px;
+  color: #ffffff;
+  background: #DF69E8;
+}
+
+.details {
+  margin: 30px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details .todo-item {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Lato', sans-serif;
+  font-size: 22px;
+  line-height: 2.1;
+  color: #b8b8b8;
+  align-items: center;
+}
+
+.todo-item .item-actions {
+  display: flex;
+  align-items: center;
+}
+
+.item-actions input {
+  height: 22px;
+  width: 22px;
+  border-radius: 100%;;
+}
+
+.delete-button {
+  height: 22px;
+  width: 22px;
+  background-image: url('/deleteButton.svg') ;
+  background-size: cover;
+}

@@ -2,13 +2,13 @@ export default function getTodosAction() {
   return async (dispatch) => {
     dispatch({type: 'GET_TODOS_START'});
     let fetchResult = await fetch('http://localhost:8080/todos', {
-      header: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'}
     })
-    console.log(fetchResult)
-    let data = fetchResult.json();
+    let data = await fetchResult.json();
     dispatch({
-      type: 'GET_TODO_SUCCESS',
-      data
+      type: 'GET_TODOS_SUCCESS',
+      data,
+      currentMaxId: Math.max(...data.map(todo => todo.id))
     })
   }
 }
