@@ -1,7 +1,7 @@
 export default function getTodosAction() {
   return async (dispatch) => {
     dispatch({type: 'GET_TODOS_START'});
-    let fetchResult = await fetch('http://localhost:8080/todos', {
+    let fetchResult = await fetch('/todos', {
       headers: {'Content-Type': 'application/json'}
     })
     let data = await fetchResult.json();
