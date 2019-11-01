@@ -9,6 +9,11 @@ import TodoItem from './TodoItem';
 
 function TodoList({ todos, currentMaxId, addTodo, getTodos, deleteTodoById, updateTodo }) {
   useEffect(getTodos, []);
+  useEffect(()=>{
+    if(todos.length >= 101){
+      alert(`{todos.length} is way tooooooo much work for one day!....Gonna die soon~~`);
+    }
+  })
   return (
     <div className="todolist">
       <div className="heading">
